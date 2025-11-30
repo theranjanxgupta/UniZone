@@ -500,27 +500,7 @@ export default function Index() {
         <div className="max-w-4xl mx-auto space-y-6">
           {/* Download removed per request */}
 
-          {/* MGX Promotion */}
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            viewport={{ once: true }}
-            className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20"
-          >
-            <p className="text-lg font-medium mb-2">✨ Built with AI-Powered Development</p>
-            <p className="text-sm text-gray-300 mb-4">
-              This project was created using <span className="font-bold text-purple-400">MetaGPT (MGX)</span> - an innovative AI development platform
-            </p>
-            <a
-              href="https://mgx.dev"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block text-purple-400 hover:text-purple-300 font-semibold underline transition-colors"
-            >
-              Visit mgx.dev to build your own AI-powered projects →
-            </a>
-          </motion.div>
+          {/* MGX promotion removed */}
 
           {/* Copyright */}
           <div className="pt-6 border-t border-white/20">
