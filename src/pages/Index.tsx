@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Star, X, Download } from 'lucide-react';
+import { ArrowRight, Star, X } from 'lucide-react';
 import LoginModal from '@/components/LoginModal';
 import StudentPortal from '@/components/StudentPortal';
 import ComingSoon from '@/components/ComingSoon';
@@ -25,15 +25,7 @@ export default function Index() {
     element?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const handleDownloadZip = () => {
-    // Download the pre-generated zip file
-    const link = document.createElement('a');
-    link.href = '/unizone-project.zip';
-    link.download = 'unizone-project.zip';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
+  
 
   const teamMembers = [
     {
@@ -506,24 +498,7 @@ export default function Index() {
         className="bg-gradient-to-br from-gray-900 to-black py-16 px-6 text-center text-white"
       >
         <div className="max-w-4xl mx-auto space-y-6">
-          {/* Download Button */}
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            viewport={{ once: true }}
-            className="flex justify-center mb-8"
-          >
-            <motion.button
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={handleDownloadZip}
-              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold px-8 py-4 rounded-full shadow-lg flex items-center gap-3 transition-all"
-            >
-              <Download className="w-5 h-5" />
-              Download Source Code (ZIP)
-            </motion.button>
-          </motion.div>
+          {/* Download removed per request */}
 
           {/* MGX Promotion */}
           <motion.div
