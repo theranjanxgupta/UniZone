@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Star, X } from 'lucide-react';
 import LoginModal from '@/components/LoginModal';
@@ -9,6 +9,24 @@ import TeamCard from '@/components/TeamCard';
 import { getCurrentUser, setCurrentUser } from '@/lib/storage';
 
 export default function Index() {
+  // 3D parallax motion values for hero
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const rotateY = useTransform(mouseX, [-300, 300], [18, -18]);
+  const rotateX = useTransform(mouseY, [-200, 200], [-12, 12]);
+
+  const handleHeroMouse = (e: React.MouseEvent) => {
+    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+    const px = e.clientX - (rect.left + rect.width / 2);
+    const py = e.clientY - (rect.top + rect.height / 2);
+    mouseX.set(px);
+    mouseY.set(py);
+  };
+
+  const resetHeroMouse = () => {
+    mouseX.set(0);
+    mouseY.set(0);
+  };
   const [showLogin, setShowLogin] = useState(false);
   const [showStudentPortal, setShowStudentPortal] = useState(false);
   const [showComingSoon, setShowComingSoon] = useState(false);
@@ -84,10 +102,13 @@ export default function Index() {
       {/* New Clay-morphism Hero Section */}
       <section className="min-h-screen flex items-center justify-center px-6 py-12">
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8 }}
-          className="w-full max-w-7xl bg-white rounded-[3rem] shadow-[0_20px_60px_rgba(0,0,0,0.15)] p-10"
+          onMouseMove={handleHeroMouse}
+          onMouseLeave={resetHeroMouse}
+          style={{ rotateX: rotateX, rotateY: rotateY, perspective: 1200, transformStyle: 'preserve-3d' }}
+          className="w-full max-w-7xl bg-white rounded-[3rem] shadow-[0_30px_80px_rgba(2,6,23,0.12)] p-10"
         >
           {/* Navigation Header */}
           <nav className="flex items-center justify-between mb-8">
@@ -98,36 +119,36 @@ export default function Index() {
               UNIZONE
             </motion.div>
             
-            <div className="flex items-center gap-8">
+            <div className="flex items-center gap-6">
               <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.035, y: -3 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={() => scrollToSection('about')}
-                className="text-base font-medium text-gray-700 hover:text-black transition-colors"
+                className="text-sm md:text-base font-medium text-gray-700 hover:text-black transition-colors whitespace-nowrap"
               >
                 About
               </motion.button>
               <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.035, y: -3 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={() => scrollToSection('team')}
-                className="text-base font-medium text-gray-700 hover:text-black transition-colors"
+                className="text-sm md:text-base font-medium text-gray-700 hover:text-black transition-colors whitespace-nowrap"
               >
                 Contact
               </motion.button>
               <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.035, y: -3 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={() => setShowLearnMore(true)}
-                className="text-base font-medium text-gray-700 hover:text-black transition-colors"
+                className="text-sm md:text-base font-medium text-gray-700 hover:text-black transition-colors whitespace-nowrap"
               >
                 Learn More
               </motion.button>
               <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.02, y: -2 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={() => setShowLogin(true)}
-                className="text-base font-medium text-gray-700 hover:text-black transition-colors"
+                className="text-sm md:text-base font-medium text-white bg-black px-3 md:px-4 py-1.5 md:py-2 rounded-lg hover:bg-gray-800 transition-colors whitespace-nowrap shadow-sm"
               >
                 Log In
               </motion.button>
@@ -175,22 +196,27 @@ export default function Index() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
-                className="flex items-center gap-4 pt-4"
+                className="flex items-center gap-4 pt-4 flex-wrap"
               >
-                <Button
-                  onClick={() => scrollToSection('features')}
-                  className="bg-black text-white hover:bg-gray-800 rounded-full px-8 py-6 text-base font-semibold shadow-lg"
-                >
-                  Get Started
-                </Button>
-                <Button
-                  onClick={() => setShowLearnMore(true)}
-                  variant="outline"
-                  className="border-2 border-black text-black hover:bg-gray-50 rounded-full px-8 py-6 text-base font-semibold"
-                >
-                  Learn More
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Button>
+                <motion.div whileHover={{ y: -6, scale: 1.02, rotateX: 2 }} whileTap={{ scale: 0.99 }} transition={{ type: 'spring', stiffness: 300 }}>
+                  <Button
+                    onClick={() => scrollToSection('features')}
+                    className="bg-black text-white hover:bg-gray-800 rounded-full px-8 py-4 md:px-8 md:py-6 text-base font-semibold shadow-lg"
+                  >
+                    Get Started
+                  </Button>
+                </motion.div>
+
+                <motion.div whileHover={{ y: -6, scale: 1.02, rotateX: 2 }} whileTap={{ scale: 0.99 }} transition={{ type: 'spring', stiffness: 300 }}>
+                  <Button
+                    onClick={() => setShowLearnMore(true)}
+                    variant="outline"
+                    className="border-2 border-black text-black hover:bg-gray-50 rounded-full px-8 py-4 md:px-8 md:py-6 text-base font-semibold"
+                  >
+                    Learn More
+                    <ArrowRight className="ml-2 w-5 h-5" />
+                  </Button>
+                </motion.div>
               </motion.div>
             </div>
 
@@ -342,8 +368,9 @@ export default function Index() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
                 onClick={feature.action}
-                whileHover={{ y: -8, scale: 1.02 }}
-                className="bg-white rounded-3xl p-10 shadow-[0_10px_40px_rgba(0,0,0,0.1)] hover:shadow-[0_20px_60px_rgba(0,0,0,0.15)] transition-all text-left group"
+                whileHover={{ y: -10, scale: 1.03, rotateX: 3 }}
+                whileTap={{ scale: 0.99 }}
+                className="bg-white rounded-3xl p-10 shadow-[0_10px_40px_rgba(0,0,0,0.08)] hover:shadow-[0_30px_80px_rgba(2,6,23,0.08)] transition-all text-left group"
               >
                 <motion.div
                   className="text-6xl mb-6"
