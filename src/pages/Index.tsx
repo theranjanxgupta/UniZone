@@ -90,20 +90,20 @@ export default function Index() {
           className="w-full max-w-7xl bg-white rounded-[3rem] shadow-[0_20px_60px_rgba(0,0,0,0.15)] p-10"
         >
           {/* Navigation Header */}
-          <nav className="flex items-center justify-between mb-8 flex-wrap">
+          <nav className="flex items-center justify-between mb-8">
             <motion.div
               whileHover={{ scale: 1.05 }}
-              className="text-2xl md:text-3xl font-bold text-black tracking-tight"
+              className="text-3xl font-bold text-black tracking-tight"
             >
               UNIZONE
             </motion.div>
             
-            <div className="flex items-center gap-3 md:gap-8 flex-wrap justify-end">
+            <div className="flex items-center gap-8">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => scrollToSection('about')}
-                className="text-sm md:text-base font-medium text-gray-700 hover:text-black transition-colors whitespace-nowrap"
+                className="text-base font-medium text-gray-700 hover:text-black transition-colors"
               >
                 About
               </motion.button>
@@ -111,7 +111,7 @@ export default function Index() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => scrollToSection('team')}
-                className="text-sm md:text-base font-medium text-gray-700 hover:text-black transition-colors whitespace-nowrap"
+                className="text-base font-medium text-gray-700 hover:text-black transition-colors"
               >
                 Contact
               </motion.button>
@@ -119,7 +119,7 @@ export default function Index() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setShowLearnMore(true)}
-                className="text-sm md:text-base font-medium text-gray-700 hover:text-black transition-colors whitespace-nowrap"
+                className="text-base font-medium text-gray-700 hover:text-black transition-colors"
               >
                 Learn More
               </motion.button>
@@ -127,15 +127,15 @@ export default function Index() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setShowLogin(true)}
-                className="text-sm md:text-base font-medium text-white bg-black px-3 md:px-4 py-1.5 md:py-2 rounded-lg hover:bg-gray-800 transition-colors whitespace-nowrap"
+                className="text-base font-medium text-gray-700 hover:text-black transition-colors"
               >
                 Log In
               </motion.button>
             </div>
           </nav>
 
-          {/* Main Hero Content - Two Column Layout (stack on small screens) */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          {/* Main Hero Content - Two Column Layout */}
+          <div className="grid grid-cols-2 gap-8 items-center">
             {/* Left Column - Text Content */}
             <div className="space-y-4">
               {/* Badge */}
@@ -154,7 +154,7 @@ export default function Index() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-black leading-tight"
+                className="text-7xl font-bold text-black leading-tight"
               >
                 Campus life,<br />simplified.
               </motion.h1>
@@ -175,18 +175,18 @@ export default function Index() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
-                className="flex items-center gap-3 md:gap-4 pt-4 flex-wrap"
+                className="flex items-center gap-4 pt-4"
               >
                 <Button
                   onClick={() => scrollToSection('features')}
-                  className="bg-black text-white hover:bg-gray-800 rounded-full px-6 py-3 md:px-8 md:py-6 text-base font-semibold shadow-lg"
+                  className="bg-black text-white hover:bg-gray-800 rounded-full px-8 py-6 text-base font-semibold shadow-lg"
                 >
                   Get Started
                 </Button>
                 <Button
                   onClick={() => setShowLearnMore(true)}
                   variant="outline"
-                  className="border-2 border-black text-black hover:bg-gray-50 rounded-full px-6 py-3 md:px-8 md:py-6 text-base font-semibold"
+                  className="border-2 border-black text-black hover:bg-gray-50 rounded-full px-8 py-6 text-base font-semibold"
                 >
                   Learn More
                   <ArrowRight className="ml-2 w-5 h-5" />
@@ -199,7 +199,7 @@ export default function Index() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.6 }}
-              className="relative w-full min-h-[260px] sm:min-h-[360px] md:min-h-[480px] flex items-center justify-center"
+              className="relative h-[600px] flex items-center justify-center"
             >
               {/* 3D Character Illustration */}
               <div className="relative w-full h-full flex items-center justify-center">
@@ -209,7 +209,7 @@ export default function Index() {
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                   className="relative z-10"
                 >
-                  <svg viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-40 sm:w-56 md:w-72 lg:w-96">
+                  <svg width="400" height="500" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
                     {/* Character Body - Yellow Sweater */}
                     <ellipse cx="200" cy="380" rx="80" ry="100" fill="#FDB813" />
                     <rect x="140" y="320" width="120" height="140" rx="20" fill="#FDB813" />
@@ -252,31 +252,34 @@ export default function Index() {
                   </svg>
                 </motion.div>
 
-                {/* Floating UI Cards - hidden on small screens to avoid clutter */}
+                {/* Floating UI Cards */}
+                {/* Grade Card - Top Left */}
                 <motion.div
-                  animate={{ y: [0, -12, 0], rotate: [-2, 2, -2] }}
+                  animate={{ y: [0, -15, 0], rotate: [-2, 2, -2] }}
                   transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  className="hidden md:block absolute top-20 right-8 bg-white rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.15)] p-4 md:p-6 w-28 md:w-32"
+                  className="absolute top-20 left-8 bg-white rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.15)] p-6 w-32"
                 >
-                  <div className="text-4xl md:text-5xl font-bold text-green-600">A+</div>
+                  <div className="text-5xl font-bold text-green-600">A+</div>
                   <div className="text-xs text-gray-500 mt-2">Grade</div>
                 </motion.div>
 
+                {/* Student ID Card - Middle Left */}
                 <motion.div
                   animate={{ y: [0, 10, 0], rotate: [2, -2, 2] }}
                   transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                  className="hidden md:block absolute top-56 right-6 bg-white rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.15)] p-3 md:p-4 w-32 md:w-36"
+                  className="absolute top-64 left-4 bg-white rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.15)] p-4 w-36"
                 >
-                  <div className="w-10 md:w-12 h-10 md:h-12 bg-gray-200 rounded-lg mb-2"></div>
+                  <div className="w-12 h-12 bg-gray-200 rounded-lg mb-2"></div>
                   <div className="h-2 bg-gray-300 rounded mb-1"></div>
                   <div className="h-2 bg-gray-200 rounded w-3/4"></div>
                   <div className="text-xs text-gray-500 mt-2">Student ID</div>
                 </motion.div>
 
+                {/* Pie Chart Card - Bottom */}
                 <motion.div
                   animate={{ y: [0, 12, 0], rotate: [-3, 3, -3] }}
                   transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                  className="hidden md:block absolute bottom-12 right-12 bg-white rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.15)] p-3 md:p-4 w-28 md:w-32"
+                  className="absolute bottom-16 left-16 bg-white rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.15)] p-4 w-32"
                 >
                   <svg width="80" height="80" viewBox="0 0 80 80">
                     <circle cx="40" cy="40" r="35" fill="#E8F4F8" />
