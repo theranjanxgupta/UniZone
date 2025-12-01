@@ -542,7 +542,7 @@ export default function Index() {
               <motion.button
                 whileHover={{ scale: 1.1, rotate: 90 }}
                 whileTap={{ scale: 0.9 }}
-                className="absolute top-6 right-6 w-12 h-12 rounded-full bg-gray-900 flex items-center justify-center text-white shadow-lg"
+                className="absolute top-6 right-6 z-10 w-12 h-12 rounded-full bg-gray-900 hover:bg-gray-800 flex items-center justify-center text-white shadow-lg cursor-pointer"
                 onClick={() => setShowLearnMore(false)}
               >
                 <X className="w-6 h-6" />
