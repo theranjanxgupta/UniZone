@@ -103,3 +103,42 @@ export const addClubAnnouncement = (club: string, announcement: ClassAnnouncemen
   announcements.push(announcement);
   localStorage.setItem(`unizone_club_${club}`, JSON.stringify(announcements));
 };
+
+// Cart for Food Zone
+export interface CartItem {
+  id: string;
+  name: string;
+  price: number;
+  quantity: number;
+  restaurantId: string;
+  image: string;
+}
+
+export const getCart = (): CartItem[] => {
+  const cart = localStorage.getItem('foodzone_cart');
+  return cart ? JSON.parse(cart) : [];
+};
+
+export const saveCart = (cart: CartItem[]): void => {
+  localStorage.setItem('foodzone_cart', JSON.stringify(cart));
+};
+
+export const addToCart = (item: Omit<CartItem, 'quantity'> & { quantity: number }): void => {
+  const cart = getCart();
+  const existing = cart.find(i => i.id === item.id);
+  if (existing) {
+    existing.quantity += item.quantity;
+  } else {
+    cart.push({ ...item, quantity: item.quantity });
+  }
+  saveCart(cart);
+};
+
+export const removeFromCart = (id: string): void => {
+  const cart = getCart().filter(i => i.id !== id);
+  saveCart(cart);
+};
+
+export const clearCart = (): void => {
+  localStorage.removeItem('foodzone_cart');
+};
