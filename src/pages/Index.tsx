@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { ShoppingCart, Search, User } from 'lucide-react';
 import LoginModal from '@/components/LoginModal';
 import { restaurants } from '@/lib/data';
@@ -13,6 +14,7 @@ import { getCurrentUser, setCurrentUser, getCart } from '@/lib/storage';
 export default function Index() {
   const [showLogin, setShowLogin] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const [location, setLocation] = useState('All');
   const [currentUser, setCurrentUserState] = useState(getCurrentUser());
   const navigate = useNavigate();
 
@@ -22,8 +24,9 @@ export default function Index() {
   };
 
   const filteredRestaurants = restaurants.filter(r =>
-    r.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    r.cuisines.some(c => c.toLowerCase().includes(searchTerm.toLowerCase()))
+    (r.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    r.cuisines.some(c => c.toLowerCase().includes(searchTerm.toLowerCase()))) &&
+    (location === 'All' || r.location === location)
   );
 
   const cartCount = getCart().reduce((sum, item) => sum + item.quantity, 0);
@@ -35,6 +38,17 @@ export default function Index() {
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
           <h1 className="text-2xl font-bold text-orange-500">Food Zone</h1>
           <div className="flex items-center gap-4">
+            <Select value={location} onValueChange={setLocation}>
+              <SelectTrigger className="w-32">
+                <SelectValue placeholder="Location" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="All">All Locations</SelectItem>
+                <SelectItem value="Downtown">Downtown</SelectItem>
+                <SelectItem value="Midtown">Midtown</SelectItem>
+                <SelectItem value="Uptown">Uptown</SelectItem>
+              </SelectContent>
+            </Select>
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
               <Input
@@ -80,7 +94,7 @@ export default function Index() {
         <div className="max-w-7xl mx-auto px-4">
           <h3 className="text-2xl font-semibold mb-4">Popular Categories</h3>
           <div className="flex gap-4 overflow-x-auto">
-            {['Pizza', 'Burger', 'Mexican', 'Italian', 'Chinese'].map(category => (
+            {['Pizza', 'Burger', 'Mexican', 'Italian', 'Japanese', 'American'].map(category => (
               <Button
                 key={category}
                 variant="outline"

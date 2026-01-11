@@ -22,7 +22,7 @@ export const restaurants: Restaurant[] = [
   {
     id: '1',
     name: 'Pizza Palace',
-    image: '/assets/pizza.jpg', // Add images later
+    image: '/assets/pizza.jpg',
     rating: 4.5,
     deliveryTime: '25-30 mins',
     cuisines: ['Pizza', 'Italian'],
@@ -46,7 +46,33 @@ export const restaurants: Restaurant[] = [
     cuisines: ['Mexican', 'Tacos'],
     location: 'Uptown'
   },
-  // Add more
+  {
+    id: '4',
+    name: 'Sushi Spot',
+    image: '/assets/sushi.jpg',
+    rating: 4.8,
+    deliveryTime: '30-35 mins',
+    cuisines: ['Japanese', 'Sushi'],
+    location: 'Downtown'
+  },
+  {
+    id: '5',
+    name: 'Pasta House',
+    image: '/assets/pasta.jpg',
+    rating: 4.3,
+    deliveryTime: '20-25 mins',
+    cuisines: ['Italian', 'Pasta'],
+    location: 'Midtown'
+  },
+  {
+    id: '6',
+    name: 'Chicken Grill',
+    image: '/assets/chicken.jpg',
+    rating: 4.4,
+    deliveryTime: '25-30 mins',
+    cuisines: ['American', 'Grilled'],
+    location: 'Uptown'
+  },
 ];
 
 export const foodItems: FoodItem[] = [
@@ -103,5 +129,32 @@ export const foodItems: FoodItem[] = [
     image: '/assets/burrito.jpg',
     category: 'Mexican',
     restaurantId: '3'
+  },
+  {
+    id: '7',
+    name: 'California Roll',
+    description: 'Crab, avocado, cucumber',
+    price: 15.99,
+    image: '/assets/california.jpg',
+    category: 'Sushi',
+    restaurantId: '4'
+  },
+  {
+    id: '8',
+    name: 'Spaghetti Carbonara',
+    description: 'Pasta, eggs, cheese, pancetta',
+    price: 13.99,
+    image: '/assets/spaghetti.jpg',
+    category: 'Pasta',
+    restaurantId: '5'
+  },
+  {
+    id: '9',
+    name: 'Grilled Chicken',
+    description: 'Grilled chicken breast with sides',
+    price: 16.99,
+    image: '/assets/grilledchicken.jpg',
+    category: 'Grilled',
+    restaurantId: '6'
   },
 ];
